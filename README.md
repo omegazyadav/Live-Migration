@@ -4,12 +4,9 @@ This project mainly focuses with live migration of application as process/contai
 userspace level program can be checkpointed and migrated accross the host and can be restored from the previous point.  <br>
 This project is extensively written in C programming language as it has been a part of Linux Kernel projects and top level maintainers are 
 working on it and others include python and Go for some functionalities like dumped pages and CRIU tools. <br>
+For CRIU project on github, vist the link below:<br>
 
-This repository contains the information regarding Live migration of instances in different environment. 
-
-1. Virutal Machine Live migration. 
-2. Containers live migration. 
-    - For container live migration you can get more details on https://github.com/checkpoint-restore/criu .
+    	https://github.com/checkpoint-restore/criu 
 
 
 Implementation strategies for Live migration are:
