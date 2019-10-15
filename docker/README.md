@@ -16,3 +16,19 @@ For more information regarding criu project, you can visit the following link an
 
 - [CRIU github](https://github.com/checkpoint-restore) <br>
 
+# Docker Daemon modificatin
+
+ For this session we have to enable experimental mode for Docker i.e.
+
+
+```
+echo "{\"experimental\": true}" >> /etc/docker/daemon.json
+systemctl restart docker
+
+```
+In addition to having a recent version of Docker, you need CRIU 2.0 or later installed on your system. 
+
+# Experimentation of docker checkpoint/restore on Play-with-Docker platform. 
+
+
+
