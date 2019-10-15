@@ -16,7 +16,7 @@ For more information regarding criu project, you can visit the following link an
 
 - [CRIU github](https://github.com/checkpoint-restore) <br>
 
-# Docker Daemon modificatin
+# Docker Daemon modification
 
  For this session we have to enable experimental mode for Docker i.e.
 
@@ -24,11 +24,43 @@ For more information regarding criu project, you can visit the following link an
 ```
 echo "{\"experimental\": true}" >> /etc/docker/daemon.json
 systemctl restart docker
-
 ```
 In addition to having a recent version of Docker, you need CRIU 2.0 or later installed on your system. 
 
 # Experimentation of docker checkpoint/restore on Play-with-Docker platform. 
+First of all spin up the nodes for implementation on which we run a simple shell script inside the container which display a simple loop for counting the number.i.e.
+
+```
+docker run -d --name looper --security-opt seccomp:unconfined busybox  \
+         /bin/sh -c 'i=0; while true; do echo $i; i=$(expr $i + 1); sleep 1; done'
+```
+## Checking the logs of the running containers. 
+
+Now the running container log can be viewed by following command. 
+You can observe that the integer value is increasing if you run the following command for number of times. 
+
+``` 
+docker logs looper
+```
+## Checkpointing the running containers
+	
+```
+docker checkpoint create looper checkpoint1
+```
+On execution of the above command, running container gets killed and loop count stop on execution.
+
+## Restoring the checkpointed containers. 
+You can restore the checkpointed containers from the last point of execution. 
+
+```
+docker start --checkpoint checkpoint1 looper
+```
+Now if you check the log file of container you can see the integer incrementing from the last point. 
+
+
+Docker also support migrating task form one containers to another containers form which we have to checkpoint the currently running container and have to store the 
+metadata of the running container into specific location of contaienr with the help of --checkpoint-dir option. Later stored metadata can be pointed form another contaienrs and restore the previously checkpointed task but unfortunately docker has removed this functionality and exported to the Moby project. 
+
 
 
 
