@@ -11,7 +11,7 @@ For CRIU project on github, vist the page here: https://github.com/checkpoint-re
 Currently docker lacks support for this feature but still you can checkpoint and restore simple container. 
 For testing with docker container you can follow this link. 
 
-- [CRIU on Docker](https://github.com/collabnix/dockerlabs/tree/master/advanced/live migration )<br>
+- [CRIU on Docker](https://github.com/collabnix/dockerlabs/tree/master/advanced/live%20migration )<br>
 
 
 ## Checkpoint and Restore in podman container. 
