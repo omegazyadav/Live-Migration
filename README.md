@@ -13,16 +13,27 @@ For CRIU project on github, vist the page here: https://github.com/checkpoint-re
 Steps for Live Migration
 
 1. Clone the repo. 
+
 ``` git clone https://github.com/omegazyadav/live-migration.git ```
+
 2. Go to the podman director. 
+
 ``` cd live-migration/podman ``` 
+
 3. Build the podman container. 
+
 ``` sudo podman build -t screen_locomotive . ```
+
 4. Run the container interactively. 
+
 ``` sudo podman run -i --name sl screen_locomotive ``` 
+
 5. Checkpoint the running container from another terminal. 
+
 ``` sudo podman container checkpoint sl ``` 
+
 6. From the another terminal restore the checkpointed container. 
+
 ``` sudo podman container restore sl ``` 
 
 Voila ! Your train will resume from the point where it was stoped earlier. 
