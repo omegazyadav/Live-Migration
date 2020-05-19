@@ -8,9 +8,25 @@ working on it and others include python and Go for some functionalities like dum
 For CRIU project on github, vist the page here: https://github.com/checkpoint-restore/criu <br>
 
 
-Implementation strategies for Live migration are:
-1. Pre Copy
-2. Post Copy 
-	- Post copy is also known as Lazy migration.  
+## Checkpoint and Restore in podman container. 
 
-CRIU project also provides the summer internship through GSoC program. Some projects for upcoming Google Summer of Code are given in : https://criu.org/Google_Summer_of_Code_Ideas .<br>
+Steps for Live Migration
+
+1. Clone the repo. 
+``` git clone https://github.com/omegazyadav/live-migration.git ```
+2. Go to the podman director. 
+``` cd live-migration/podman ``` 
+3. Build the podman container. 
+``` sudo podman build -t screen_locomotive . ```
+4. Run the container interactively. 
+``` sudo podman run -i --name sl screen_locomotive ``` 
+5. Checkpoint the running container from another terminal. 
+``` sudo podman container checkpoint sl ``` 
+6. From the another terminal restore the checkpointed container. 
+``` sudo podman container restore sl ``` 
+
+Voila ! Your train will resume from the point where it was stoped earlier. 
+
+
+
+
