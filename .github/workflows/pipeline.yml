@@ -1,0 +1,23 @@
+name: Podman Image CI
+on:
+  push:
+    branches: [ pipeline ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2 
+        - name: Login to Podman Registry
+          run: echo ${{ secrets.PODMAN_PASS }} | podman login -u ${{ secrets.PODMAN_USER }} --password-stdin
+        - name: Get the podman tag
+          id: vars
+          run: echo ::set-output name=tag::$(echo $(git log -n1 --date=format:'%y%m%d-' --format=%cd%h))
+        
+        - name: Build SL in 
+          run: podman build $PWD/podman/ --file podman/Dockerfile --tag ${{ secrets.PODMAN_USER }}/sl:${{ steps.vars.outputs.tag }}
+        - name: Push the tagged podman image
+          run: podman push ${{ secrets.PODMAN_USER }}/sl:${{ steps.vars.outputs.tag }}
+
