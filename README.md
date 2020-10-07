@@ -20,27 +20,27 @@ Steps for Live Migration
 
 1. Clone the repo. 
 
-``` git clone https://github.com/omegazyadav/live-migration.git ```
+    ``` git clone https://github.com/omegazyadav/live-migration.git ```
 
 2. Go to the podman director. 
 
-``` cd live-migration/podman ``` 
+    ``` cd live-migration/podman ``` 
 
 3. Build the podman container. 
 
-``` sudo podman build -t screen_locomotive . ```
+    ``` sudo podman build -t screen_locomotive . ```
 
 4. Run the container interactively. 
 
-``` sudo podman run -i --name sl screen_locomotive ``` 
+    ``` sudo podman run -i --name sl screen_locomotive ``` 
 
 5. Checkpoint the running container from another terminal. 
 
-``` sudo podman container checkpoint sl ``` 
+    ``` sudo podman container checkpoint sl ``` 
 
 6. From the another terminal restore the checkpointed container. 
 
-``` sudo podman container restore sl ``` 
+    ``` sudo podman container restore sl ``` 
 
 Voila ! Your train will resume from the point where it was stopped earlier. 
 
@@ -80,6 +80,7 @@ In this way CRIU helps in checkpoint the userspace application and restore them 
 2. Create a OCI application bundle with ```skopeo``` and ```umoci```
 
     ```skopeo copy docker://busybox:latest oci:busybox:latest```
+
     ```umoci unpack --image busybox:latest bundle```
 
 3. Copy the rootfs directory from bundle
@@ -89,5 +90,13 @@ In this way CRIU helps in checkpoint the userspace application and restore them 
 4. Start the runc container 
 
     ``` sudo runc run test```
+Now checkpointing the runc container is straight forward 
 
+5. Checkpoint/Restore 
+
+    ``` sudo runc checkpoint test ```
+
+    ``` sudo runc restore test ``` 
+
+### Rootless Container 
 
