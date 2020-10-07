@@ -72,4 +72,22 @@ task of checkpoint and restore is restring the killed program from the dumped im
 In this way CRIU helps in checkpoint the userspace application and restore them in desired location.<br>
 
 
+## Checkpointing ```runc``` containers
+
+1. Create a runc config file 
+
+    ```runc spec``` 
+2. Create a OCI application bundle with ```skopeo``` and ```umoci```
+
+    ```skopeo copy docker://busybox:latest oci:busybox:latest```
+    ```umoci unpack --image busybox:latest bundle```
+
+3. Copy the rootfs directory from bundle
+    
+    ```sudo cp -r bundle/rootfs . ```
+
+4. Start the runc container 
+
+    ``` sudo runc run test```
+
 
